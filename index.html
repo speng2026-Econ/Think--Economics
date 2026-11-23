@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Think Economics — an engaging learning hub for senior secondary Economics students. Explore economic concepts, models, data and real-world issues.">
+  <meta name="theme-color" content="#142b45">
+  <title>Think Economics | Question the Unquestioned</title>
+  <style>
+    :root {
+      --navy: #142b45;
+      --navy-2: #1d3c5c;
+      --gold: #d8b45a;
+      --gold-light: #f3e7c6;
+      --ink: #1d2936;
+      --muted: #627181;
+      --paper: #f7f8fa;
+      --white: #fff;
+      --line: #e4e9ee;
+      --green: #28745d;
+      --shadow: 0 16px 40px rgba(20,43,69,.10);
+      --radius: 18px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+    body { margin: 0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: var(--ink); background: var(--paper); line-height: 1.6; }
+    a { color: inherit; }
+    button, input { font: inherit; }
+    .topbar { background: var(--navy); color: #e8edf3; font-size: .82rem; letter-spacing: .04em; text-align: center; padding: 8px 16px; }
+    header { background: rgba(255,255,255,.96); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 20; backdrop-filter: blur(12px); }
+    .nav-wrap { max-width: 1160px; margin: auto; padding: 0 24px; min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: flex; align-items: center; gap: 11px; text-decoration: none; min-width: max-content; }
+    .brand-mark { width: 42px; height: 42px; display: grid; place-items: center; background: var(--navy); color: var(--gold); border-radius: 12px; font-family: Georgia, serif; font-size: 1.4rem; font-weight: 700; }
+    .brand-name { color: var(--navy); font-family: Georgia, "Times New Roman", serif; font-size: 1.28rem; font-weight: 700; line-height: 1.1; }
+    .brand-tag { display: block; font-family: inherit; color: var(--muted); font-size: .61rem; letter-spacing: .16em; text-transform: uppercase; margin-top: 4px; font-weight: 700; }
+    nav { display: flex; align-items: center; gap: 24px; }
+    nav a { color: #435466; text-decoration: none; font-size: .9rem; font-weight: 650; transition: color .2s; }
+    nav a:hover, nav a:focus { color: #9a741d; }
+    .nav-cta { background: var(--navy); color: white !important; padding: 10px 16px; border-radius: 999px; }
+    .menu-btn { display: none; border: 1px solid var(--line); background: white; color: var(--navy); border-radius: 10px; padding: 8px 12px; cursor: pointer; }
+    .container { width: min(1160px, calc(100% - 48px)); margin: 0 auto; }
+    .hero { background: radial-gradient(circle at 82% 25%, rgba(216,180,90,.18), transparent 26%), linear-gradient(125deg, #10263e 0%, #1d3c5c 70%, #254b68 100%); color: white; overflow: hidden; position: relative; }
+    .hero:after { content: ""; position: absolute; width: 520px; height: 520px; border: 1px solid rgba(255,255,255,.12); border-radius: 50%; right: -170px; bottom: -300px; box-shadow: 0 0 0 45px rgba(255,255,255,.025), 0 0 0 90px rgba(255,255,255,.02); }
+    .hero-inner { min-height: 510px; display: grid; grid-template-columns: 1.15fr .85fr; align-items: center; gap: 54px; padding-top: 64px; padding-bottom: 68px; position: relative; z-index: 1; }
+    .eyebrow { color: var(--gold); text-transform: uppercase; letter-spacing: .19em; font-size: .75rem; font-weight: 800; }
+    h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; }
+    h1 { font-size: clamp(2.7rem, 5.4vw, 4.7rem); line-height: 1.04; margin: 18px 0; letter-spacing: -.035em; max-width: 720px; }
+    .hero p { color: #dce5ee; font-size: 1.12rem; max-width: 610px; margin: 0 0 28px; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn { display: inline-flex; justify-content: center; align-items: center; gap: 8px; border: 1px solid transparent; border-radius: 999px; padding: 12px 19px; text-decoration: none; font-weight: 750; cursor: pointer; transition: transform .18s, box-shadow .18s, background .18s; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,.13); }
+    .btn-gold { background: var(--gold); color: #1d2d3d; }
+    .btn-outline { border-color: rgba(255,255,255,.45); color: white; background: rgba(255,255,255,.05); }
+    .hero-panel { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18); border-radius: 24px; padding: 26px; box-shadow: 0 24px 70px rgba(0,0,0,.18); backdrop-filter: blur(8px); }
+    .panel-top { display: flex; justify-content: space-between; align-items: center; color: #dbe5ed; font-size: .8rem; margin-bottom: 22px; }
+    .live-dot { width: 8px; height: 8px; display: inline-block; border-radius: 50%; background: #85c7a7; margin-right: 7px; }
+    .mini-chart { height: 170px; position: relative; border-bottom: 1px solid rgba(255,255,255,.25); border-left: 1px solid rgba(255,255,255,.25); background: repeating-linear-gradient(to bottom, transparent 0 41px, rgba(255,255,255,.10) 42px); }
+    .mini-chart svg { width: 100%; height: 100%; overflow: visible; }
+    .chart-caption { display: flex; justify-content: space-between; color: #c5d2de; font-size: .75rem; margin-top: 10px; }
+    .panel-note { margin-top: 22px; padding: 13px 15px; background: rgba(216,180,90,.13); border-left: 3px solid var(--gold); color: #f2e7ca; border-radius: 0 10px 10px 0; font-size: .88rem; }
+    .stats { background: white; border-bottom: 1px solid var(--line); }
+    .stats-grid { display: grid; grid-template-columns: repeat(3,1fr); padding: 23px 0; gap: 20px; }
+    .stat { display: flex; align-items: center; gap: 14px; justify-content: center; }
+    .stat-icon { width: 42px; height: 42px; border-radius: 13px; background: var(--gold-light); color: var(--navy); display: grid; place-items: center; font-size: 1.2rem; }
+    .stat strong { display: block; color: var(--navy); font-size: .96rem; }
+    .stat span { color: var(--muted); font-size: .8rem; }
+    section { padding: 82px 0; }
+    .section-heading { max-width: 700px; margin-bottom: 34px; }
+    .section-heading .eyebrow { color: #9a741d; }
+    h2 { color: var(--navy); font-size: clamp(2rem, 3.4vw, 2.8rem); line-height: 1.15; margin: 10px 0 12px; }
+    .section-heading p { color: var(--muted); margin: 0; font-size: 1.02rem; }
+    .topic-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+    .topic-card { background: white; border: 1px solid var(--line); border-radius: var(--radius); padding: 25px; transition: transform .2s, box-shadow .2s, border-color .2s; }
+    .topic-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: #d7c18c; }
+    .topic-icon { width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; background: #edf2f6; color: var(--navy); font-size: 1.35rem; margin-bottom: 18px; }
+    .topic-card h3 { color: var(--navy); font-size: 1.35rem; margin: 0 0 8px; }
+    .topic-card p { color: var(--muted); font-size: .91rem; margin: 0 0 16px; }
+    .topic-card a { color: #8b6819; font-size: .88rem; font-weight: 800; text-decoration: none; }
+    .topic-card a:hover { text-decoration: underline; }
+    .feature-band { background: #edf1f4; }
+    .feature-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 52px; align-items: center; }
+    .feature-visual { background: var(--navy); min-height: 340px; border-radius: 24px; padding: 28px; color: white; position: relative; overflow: hidden; }
+    .feature-visual:before { content: ""; position: absolute; width: 260px; height: 260px; border: 1px solid rgba(216,180,90,.45); border-radius: 50%; right: -70px; top: -80px; box-shadow: 0 0 0 28px rgba(216,180,90,.06), 0 0 0 58px rgba(216,180,90,.04); }
+    .visual-label { color: var(--gold); text-transform: uppercase; font-size: .72rem; letter-spacing: .16em; font-weight: 800; }
+    .visual-equation { font-family: Georgia,serif; font-size: clamp(1.5rem,3vw,2.35rem); margin: 40px 0 18px; position: relative; }
+    .visual-equation span { color: var(--gold); }
+    .visual-bars { display: flex; gap: 9px; align-items: end; height: 95px; margin-top: 25px; position: relative; }
+    .visual-bars i { display: block; flex: 1; background: linear-gradient(180deg,#e6c978,#a9822c); border-radius: 6px 6px 0 0; opacity: .95; }
+    .visual-bars i:nth-child(1){height:35%}.visual-bars i:nth-child(2){height:48%}.visual-bars i:nth-child(3){height:43%}.visual-bars i:nth-child(4){height:67%}.visual-bars i:nth-child(5){height:60%}.visual-bars i:nth-child(6){height:88%}.visual-bars i:nth-child(7){height:75%}
+    .feature-copy h2 { margin-top: 0; }
+    .feature-copy p { color: var(--muted); }
+    .check-list { list-style: none; padding: 0; margin: 22px 0 0; display: grid; gap: 12px; }
+    .check-list li { display: flex; gap: 10px; color: #344657; font-size: .94rem; }
+    .check-list li:before { content: "✓"; display: grid; place-items: center; flex: 0 0 22px; height: 22px; background: #e1eee8; color: var(--green); border-radius: 50%; font-size: .78rem; font-weight: 900; }
+    .lab-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+    .lab-card { background: white; border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; }
+    .lab-card h3 { color: var(--navy); font-size: 1.35rem; margin: 0 0 8px; }
+    .lab-card p { color: var(--muted); font-size: .91rem; }
+    .question { background: #f7f4eb; border-radius: 12px; padding: 17px; margin: 18px 0; color: #273747; font-weight: 700; }
+    .quiz-options { display: grid; gap: 9px; }
+    .quiz-options button { text-align: left; padding: 11px 14px; border: 1px solid var(--line); background: white; border-radius: 10px; color: var(--ink); cursor: pointer; }
+    .quiz-options button:hover { border-color: var(--gold); background: #fffdf7; }
+    .quiz-options button.correct { border-color: #78b69b; background: #edf7f1; }
+    .quiz-options button.incorrect { border-color: #d69a91; background: #fff1ef; }
+    #quiz-feedback { min-height: 28px; color: var(--green); font-size: .88rem; font-weight: 700; margin-top: 10px; }
+    .data-bars { display: grid; gap: 13px; margin-top: 20px; }
+    .bar-row { display: grid; grid-template-columns: 92px 1fr 44px; gap: 10px; align-items: center; font-size: .82rem; color: var(--muted); }
+    .bar-track { height: 12px; background: #edf1f4; border-radius: 20px; overflow: hidden; }
+    .bar-fill { height: 100%; background: linear-gradient(90deg,#244b6d,#d8b45a); border-radius: inherit; }
+    .data-note { margin-top: 17px; font-size: .78rem; color: #7a8792; }
+    .cta { background: var(--navy); color: white; padding: 58px 0; }
+    .cta-inner { display: flex; justify-content: space-between; align-items: center; gap: 28px; }
+    .cta h2 { color: white; margin: 0 0 8px; }
+    .cta p { color: #d0dbe5; margin: 0; }
+    footer { background: #0d2033; color: #c2ced9; padding: 36px 0; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 24px; align-items: center; }
+    .footer-brand { color: white; font-family: Georgia,serif; font-weight: 700; font-size: 1.1rem; }
+    footer small { color: #9aabba; }
+    .footer-links { display: flex; gap: 18px; flex-wrap: wrap; }
+    .footer-links a { color: #c2ced9; font-size: .82rem; text-decoration: none; }
+    .footer-links a:hover { color: var(--gold); }
+    .notice { background: #fff8e8; border: 1px solid #ead9a8; color: #6b5520; border-radius: 12px; padding: 14px 16px; font-size: .84rem; margin-top: 22px; }
+    @media (max-width: 850px) {
+      nav { gap: 13px; }
+      nav a { font-size: .82rem; }
+      .hero-inner { grid-template-columns: 1fr .8fr; gap: 28px; }
+      .topic-grid { grid-template-columns: repeat(2,1fr); }
+      .feature-grid { gap: 30px; }
+    }
+    @media (max-width: 680px) {
+      .nav-wrap { min-height: 68px; padding: 0 18px; }
+      .menu-btn { display: block; }
+      nav { display: none; position: absolute; top: 68px; left: 0; right: 0; padding: 18px 24px 22px; background: white; border-bottom: 1px solid var(--line); box-shadow: var(--shadow); flex-direction: column; align-items: stretch; gap: 15px; }
+      nav.open { display: flex; }
+      nav a { font-size: .95rem; }
+      .nav-cta { text-align: center; }
+      .container { width: min(100% - 36px, 560px); }
+      .hero-inner { grid-template-columns: 1fr; padding-top: 54px; padding-bottom: 48px; }
+      .hero-panel { max-width: 500px; }
+      .stats-grid { grid-template-columns: 1fr; gap: 15px; }
+      .stat { justify-content: flex-start; }
+      section { padding: 62px 0; }
+      .topic-grid, .lab-grid, .feature-grid { grid-template-columns: 1fr; }
+      .feature-visual { min-height: 290px; }
+      .cta-inner, .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *:before, *:after { transition-duration: .01ms !important; animation-duration: .01ms !important; } }
+  </style>
+</head>
+<body>
+  <div class="topbar">A learning space for senior secondary Economics · Years 11–12</div>
+  <header>
+    <div class="nav-wrap">
+      <a class="brand" href="#home" aria-label="Think Economics home">
+        <span class="brand-mark">T</span>
+        <span><span class="brand-name">Think Economics</span><span class="brand-tag">Question the Unquestioned</span></span>
+      </a>
+      <button class="menu-btn" id="menu-toggle" aria-expanded="false" aria-controls="main-nav">Menu ☰</button>
+      <nav id="main-nav" aria-label="Main navigation">
+        <a href="#economics">Explore</a>
+        <a href="#thinking">Think Like an Economist</a>
+        <a href="#data-lab">Data Lab</a>
+        <a href="#learning">Quick Challenge</a>
+        <a class="nav-cta" href="#start">Start learning</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-inner">
+        <div>
+          <div class="eyebrow">Economics · Evidence · Perspective</div>
+          <h1>Think beyond the <span style="color:var(--gold)">obvious.</span></h1>
+          <p>Economics is more than graphs and definitions. It is a way of understanding the choices, incentives and trade-offs shaping the world around us.</p>
+          <div class="hero-actions">
+            <a class="btn btn-gold" href="#economics">Explore the learning hub <span aria-hidden="true">→</span></a>
+            <a class="btn btn-outline" href="#thinking">How economists think</a>
+          </div>
+        </div>
+        <div class="hero-panel" aria-label="Illustrative economic data visualisation">
+          <div class="panel-top"><span><i class="live-dot"></i>THE ECONOMY IN MOTION</span><span>DATA → INSIGHT</span></div>
+          <div class="mini-chart">
+            <svg viewBox="0 0 440 170" role="img" aria-label="Illustrative upward and downward economic trend line">
+              <defs><linearGradient id="area" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#d8b45a" stop-opacity=".35"/><stop offset="1" stop-color="#d8b45a" stop-opacity="0"/></linearGradient></defs>
+              <path d="M0 130 C45 120 52 95 95 105 S150 70 190 83 S240 42 280 62 S340 30 380 43 S415 20 440 15 L440 170 L0 170Z" fill="url(#area)"/>
+              <path d="M0 130 C45 120 52 95 95 105 S150 70 190 83 S240 42 280 62 S340 30 380 43 S415 20 440 15" fill="none" stroke="#e5c56e" stroke-width="4" stroke-linecap="round"/>
+              <circle cx="280" cy="62" r="5" fill="#fff" stroke="#e5c56e" stroke-width="3"/>
+              <circle cx="440" cy="15" r="5" fill="#fff" stroke="#e5c56e" stroke-width="3"/>
+            </svg>
+          </div>
+          <div class="chart-caption"><span>Observe the trend</span><span>Ask why it changed</span></div>
+          <div class="panel-note">A strong economic explanation connects evidence, economic relationships and the context behind the data.</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="stats">
+      <div class="container stats-grid">
+        <div class="stat"><div class="stat-icon">⌕</div><div><strong>Question assumptions</strong><span>Look beyond first impressions</span></div></div>
+        <div class="stat"><div class="stat-icon">▥</div><div><strong>Interpret evidence</strong><span>Find meaning in economic data</span></div></div>
+        <div class="stat"><div class="stat-icon">↗</div><div><strong>Evaluate outcomes</strong><span>Make reasoned judgements</span></div></div>
+      </div>
+    </div>
+
+    <section id="economics">
+      <div class="container">
+        <div class="section-heading">
+          <div class="eyebrow">Explore the discipline</div>
+          <h2>Build your economic toolkit.</h2>
+          <p>Start with the central ideas, then connect them to real-world decisions and outcomes. These introductory sections provide a foundation for senior Economics.</p>
+        </div>
+        <div class="topic-grid">
+          <article class="topic-card">
+            <div class="topic-icon">⚖</div>
+            <h3>Microeconomics</h3>
+            <p>Explore how individuals, households and firms make choices, and how markets coordinate economic activity.</p>
+            <a href="#micro">Explore key ideas →</a>
+          </article>
+          <article class="topic-card">
+            <div class="topic-icon">▤</div>
+            <h3>Macroeconomics</h3>
+            <p>Investigate economic growth, inflation, unemployment and the policies used to influence aggregate activity.</p>
+            <a href="#macro">Explore key ideas →</a>
+          </article>
+          <article class="topic-card">
+            <div class="topic-icon">◎</div>
+            <h3>International Economics</h3>
+            <p>Understand trade, protection, exchange rates and the economic relationships connecting countries.</p>
+            <a href="#international">Explore key ideas →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-band" id="thinking">
+      <div class="container feature-grid">
+        <div class="feature-visual">
+          <div class="visual-label">The economist's mindset</div>
+          <div class="visual-equation">Evidence <span>+</span> Relationships <span>+</span> Context</div>
+          <p style="color:#d4e0e9;max-width:330px">Move from describing what happened to explaining why it happened and evaluating what it means.</p>
+          <div class="visual-bars" aria-label="Decorative data bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+        <div class="feature-copy">
+          <div class="eyebrow">A way of thinking</div>
+          <h2>Think like an economist.</h2>
+          <p>Economic thinking involves more than applying a model. It means recognising assumptions, tracing cause-and-effect relationships and testing explanations against evidence.</p>
+          <ul class="check-list">
+            <li><strong>Identify:</strong> What economic issue or change is occurring?</li>
+            <li><strong>Explain:</strong> Which economic relationships help explain it?</li>
+            <li><strong>Apply:</strong> What does the evidence suggest in this context?</li>
+            <li><strong>Evaluate:</strong> How effective, equitable or sustainable is the outcome?</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="data-lab">
+      <div class="container">
+        <div class="section-heading">
+          <div class="eyebrow">From data to insight</div>
+          <h2>Welcome to the Economic Data Lab.</h2>
+          <p>Data is the starting point for inquiry—not the conclusion. Practise identifying patterns, calculating change and asking what might explain the movement.</p>
+        </div>
+        <div class="lab-grid">
+          <article class="lab-card">
+            <h3>Read the pattern</h3>
+            <p>The bars below are illustrative index values. Compare the movement across periods before proposing an explanation.</p>
+            <div class="data-bars" role="img" aria-label="Illustrative index values: 92, 96, 94, 101 and 108">
+              <div class="bar-row"><span>Period 1</span><div class="bar-track"><div class="bar-fill" style="width:68%"></div></div><strong>92</strong></div>
+              <div class="bar-row"><span>Period 2</span><div class="bar-track"><div class="bar-fill" style="width:75%"></div></div><strong>96</strong></div>
+              <div class="bar-row"><span>Period 3</span><div class="bar-track"><div class="bar-fill" style="width:72%"></div></div><strong>94</strong></div>
+              <div class="bar-row"><span>Period 4</span><div class="bar-track"><div class="bar-fill" style="width:84%"></div></div><strong>101</strong></div>
+              <div class="bar-row"><span>Period 5</span><div class="bar-track"><div class="bar-fill" style="width:94%"></div></div><strong>108</strong></div>
+            </div>
+            <div class="data-note">Illustrative data created for learning purposes; not an official economic series.</div>
+          </article>
+          <article class="lab-card">
+            <h3>Ask better questions</h3>
+            <p>Use these prompts to turn a visual pattern into a more rigorous economic inquiry.</p>
+            <ul class="check-list">
+              <li>What is the overall direction of the data?</li>
+              <li>Which period shows a change in direction or pace?</li>
+              <li>What is the percentage change across the period?</li>
+              <li>Which demand-side or supply-side factors could explain the trend?</li>
+              <li>What additional evidence would help test your explanation?</li>
+            </ul>
+          </article>
+        </div>
+        <div class="notice"><strong>Data discipline:</strong> Always check the indicator, units, time period, source and whether the data are nominal or real before drawing conclusions.</div>
+      </div>
+    </section>
+
+    <section class="feature-band" id="learning">
+      <div class="container">
+        <div class="section-heading">
+          <div class="eyebrow">Check your understanding</div>
+          <h2>A quick Economics challenge.</h2>
+          <p>Test a core concept. Select an answer to receive immediate feedback.</p>
+        </div>
+        <div class="lab-card" style="max-width:760px">
+          <div class="eyebrow">Question 01 · Opportunity cost</div>
+          <div class="question">A student spends two hours studying Economics instead of working a casual shift that would have paid $50. What is the opportunity cost of studying?</div>
+          <div class="quiz-options" id="quiz-options">
+            <button type="button" data-answer="a">A. The total value of all the student's study materials</button>
+            <button type="button" data-answer="b">B. The $50 income forgone from not working</button>
+            <button type="button" data-answer="c">C. The time spent studying, regardless of alternatives</button>
+          </div>
+          <div id="quiz-feedback" role="status" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="micro">
+      <div class="container">
+        <div class="section-heading">
+          <div class="eyebrow">Learning pathway 01</div>
+          <h2>Microeconomics: choices and markets.</h2>
+          <p>Scarcity means choices must be made. Microeconomics examines how those choices interact through markets and how resources are allocated.</p>
+        </div>
+        <div class="topic-grid">
+          <article class="topic-card"><h3>Scarcity and choice</h3><p>Explore limited resources, unlimited wants, opportunity cost and the production possibility frontier.</p></article>
+          <article class="topic-card"><h3>Demand and supply</h3><p>Analyse how changes in price and non-price determinants influence market outcomes.</p></article>
+          <article class="topic-card"><h3>Market failure</h3><p>Investigate externalities, public goods, information asymmetry and policy responses.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-band" id="macro">
+      <div class="container">
+        <div class="section-heading">
+          <div class="eyebrow">Learning pathway 02</div>
+          <h2>Macroeconomics: the whole economy.</h2>
+          <p>Macroeconomics considers aggregate outcomes and the relationships between economic growth, price stability, employment and living standards.</p>
+        </div>
+        <div class="topic-grid">
+          <article class="topic-card"><h3>Economic growth</h3><p>Distinguish nominal and real GDP, examine productivity and consider the limits of GDP as a wellbeing measure.</p></article>
+          <article class="topic-card"><h3>Inflation and unemployment</h3><p>Interpret changes in the price level and labour market conditions, including their causes and consequences.</p></article>
+          <article class="topic-card"><h3>Macroeconomic policy</h3><p>Explore monetary and fiscal policy, transmission mechanisms, policy lags and trade-offs.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="international">
+      <div class="container">
+        <div class="section-heading">
+          <div class="eyebrow">Learning pathway 03</div>
+          <h2>International Economics: an interconnected world.</h2>
+          <p>Countries are linked through trade, finance and investment. Examine the benefits, costs and distributional effects of global economic integration.</p>
+        </div>
+        <div class="topic-grid">
+          <article class="topic-card"><h3>International trade</h3><p>Use comparative advantage to explain specialisation and the gains from trade.</p></article>
+          <article class="topic-card"><h3>Protection and trade policy</h3><p>Evaluate tariffs, quotas and subsidies, including impacts on consumers, producers and governments.</p></article>
+          <article class="topic-card"><h3>Exchange rates</h3><p>Explore currency appreciation and depreciation and their effects on trade and the domestic economy.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="start">
+      <div class="container cta-inner">
+        <div><div class="eyebrow">Your next step</div><h2>Stay curious. Follow the evidence.</h2><p>Good Economics starts with a better question.</p></div>
+        <a class="btn btn-gold" href="#economics">Explore the topics ↑</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div><div class="footer-brand">Think Economics</div><small>Question the Unquestioned · A senior Economics learning hub</small></div>
+      <div class="footer-links"><a href="#home">Home</a><a href="#economics">Explore</a><a href="#data-lab">Data Lab</a><a href="#learning">Challenge</a></div>
+    </div>
+    <div class="container" style="margin-top:22px"><small>Educational resource prototype. Content should be checked against the current syllabus and authoritative sources before classroom use. No affiliation with any school or examining authority is implied.</small></div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const mainNav = document.getElementById('main-nav');
+    menuToggle.addEventListener('click', () => {
+      const isOpen = mainNav.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+      menuToggle.textContent = isOpen ? 'Close ✕' : 'Menu ☰';
+    });
+    mainNav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      mainNav.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.textContent = 'Menu ☰';
+    }));
+
+    const quizOptions = document.querySelectorAll('#quiz-options button');
+    const feedback = document.getElementById('quiz-feedback');
+    quizOptions.forEach(button => {
+      button.addEventListener('click', () => {
+        quizOptions.forEach(option => {
+          option.classList.remove('correct', 'incorrect');
+          option.disabled = true;
+        });
+        if (button.dataset.answer === 'b') {
+          button.classList.add('correct');
+          feedback.textContent = 'Correct. The opportunity cost is the value of the next best alternative forgone: $50 in income.';
+        } else {
+          button.classList.add('incorrect');
+          document.querySelector('[data-answer="b"]').classList.add('correct');
+          feedback.textContent = 'Not quite. Opportunity cost is the value of the next best alternative forgone—in this case, the $50 wage.';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
